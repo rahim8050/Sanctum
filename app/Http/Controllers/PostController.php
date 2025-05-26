@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PostController extends Controller
+class PostController extends Controller 
 {
+   public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +33,8 @@ class PostController extends Controller
             'body' => 'required|string',
         ]);
 
-        $post = Post::create($fields);
+        // $post = Post::create($fields);
+          $post = $request->user()->posts()->create($fields);
         return  $post;
 
     }

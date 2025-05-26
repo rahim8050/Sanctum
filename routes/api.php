@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 route::apiResource('posts', PostController::class);
 route::post('register', [AuthController::class, 'register']);
 route::post('login', [AuthController::class, 'login']);
-route::post('logout', [AuthController::class, 'logout']);
+route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
