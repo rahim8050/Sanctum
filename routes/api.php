@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 route::apiResource('posts', PostController::class);
 route::post('register', [AuthController::class, 'register']);
 route::post('login', [AuthController::class, 'login']);
+Route::post('changepassword', [AuthController::class,'changePassword'])->middleware('auth:sanctum');
 route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
